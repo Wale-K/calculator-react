@@ -9,19 +9,15 @@ const ScreenBackground = styled.div`
   justify-content: space-between;
   text-align: right;
   border-radius: 10px 10px 0 0;
-  flex-wrap: wrap
+  flex-wrap: wrap;
 `;
 
-
-
-const Screen = () => {
+const Screen = (props) => {
   return (
-    
-      <ScreenBackground>
-        <p>This is where the past answer goes</p>
-        <p>This is where the current equations goes</p>
-      </ScreenBackground>
-    
+    <ScreenBackground>
+      <p>This is where the past answer goes</p>
+      <p>This is where the current equations goes: {props.currentEquation} </p>
+    </ScreenBackground>
   );
 };
 
