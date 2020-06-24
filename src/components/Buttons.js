@@ -2,12 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 const allButtons = [
-  "DEL",
-  " ÷ ",
+  " / ", // ÷
   "7",
   "8",
   "9",
-  " × ",
+  " * ", // ×
   "4",
   "5",
   "6",
@@ -52,7 +51,8 @@ export const Buttons = (props) => {
   //   });
   return (
     <>
-      <WideButtonsStyle onClick={props.handleClick}>AC</WideButtonsStyle>
+      <WideButtonsStyle key="AC" onClick={props.handleAllClear}>AC</WideButtonsStyle>
+      <ButtonsStyle onClick={props.handleDelete}>DEL</ButtonsStyle>
       {/* {buttonsMapped(props)} */}
       {allButtons.map((elem) => {
         return (
@@ -62,7 +62,7 @@ export const Buttons = (props) => {
         );
       })}
 
-      <WideButtonsStyle onClick={props.handleClick}>=</WideButtonsStyle>
+      <WideButtonsStyle key="=" onClick={() => props.handleEvaluate(props.currentEquation)}>=</WideButtonsStyle>
     </>
   );
 };

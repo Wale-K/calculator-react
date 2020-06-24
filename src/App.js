@@ -16,32 +16,73 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pastEquationAnswer: "",
-      currentEquation: "",
+      pastEquationAnswer: "0",
+      currentEquation: "0",
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleAllClear = this.handleAllClear.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    // this.handleEqualsOnClick = this.handleEqualsOnClick.bind(this);
+    this.handleEvaluate = this.handleEvaluate.bind(this);
+    this.myTest = this.myTest.bind(this);
   }
 
   handleClick = (buttonValue) => () => {
-    this.setState(
-      (prevState) => {
+    if (this.state.currentEquation.trim() === "0") {
+      this.setState({ currentEquation: buttonValue });
+    } else
+      this.setState((prevState) => {
         return {
           currentEquation: prevState.currentEquation + buttonValue,
         };
-      },
-      () => {
-        console.log("Callback ", this.state.currentEquation);
-      }
+      });
+    console.log(
+      `The currentEquation is: ${this.state.currentEquation} and the length is ${this.state.currentEquation.length}`
     );
-
-    console.log(this.state);
   };
+
+  handleAllClear = () => {
+    this.setState({ pastEquationAnswer: "0", currentEquation: "0" });
+  };
+
+  handleDelete = () => {
+    this.setState((prevState) => {
+      return {
+        currentEquation: prevState.currentEquation.slice(
+          0,
+          prevState.currentEquation.trim().length - 1
+        ),
+      };
+    }, console.log(`The currentEquation is: ${this.state.currentEquation} and the length is ${this.state.currentEquation.length}`));
+  };
+
+  myTest = (obj) => {
+    return Function("return (" + obj + ")")();
+  }
+
+
+  handleEvaluate = (obj) => {
+  //  this.myTest(obj);
+    this.setState({pastEquationAnswer: this.myTest(obj)})
+  };
+
+
 
   render() {
     return (
       <Calculator>
-        <Screen currentEquation={this.state.currentEquation} />
-        <Remote handleClick={this.handleClick} />
+        <Screen
+          currentEquation={this.state.currentEquation}
+          pastEquationAnswer={this.state.pastEquationAnswer}
+        />
+        <Remote
+          handleClick={this.handleClick}
+          handleAllClear={this.handleAllClear}
+          handleDelete={this.handleDelete}
+          handleEqualsOnClick={this.handleEqualsOnClick}
+          currentEquation={this.state.currentEquation}
+          handleEvaluate={this.handleEvaluate}
+        />
       </Calculator>
     );
   }
