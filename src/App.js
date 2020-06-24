@@ -17,12 +17,11 @@ class App extends React.Component {
     super(props);
     this.state = {
       pastEquationAnswer: "0",
-      currentEquation: "0",
+      currentEquation: "",
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleAllClear = this.handleAllClear.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    // this.handleEqualsOnClick = this.handleEqualsOnClick.bind(this);
     this.handleEvaluate = this.handleEvaluate.bind(this);
     this.myTest = this.myTest.bind(this);
   }
@@ -45,6 +44,16 @@ class App extends React.Component {
     this.setState({ pastEquationAnswer: "0", currentEquation: "0" });
   };
 
+  // handleDelete = () => {
+  //   if (this.state.currentEquation === "") {
+
+  //   } else {
+  //     this.setState((prevState) => {
+  //       currentEquation: prevState.currentEquation.slice(0, prevState.currentEquation.trim().length - 1)
+  //     })
+  //   }
+  // }
+
   handleDelete = () => {
     this.setState((prevState) => {
       return {
@@ -58,15 +67,12 @@ class App extends React.Component {
 
   myTest = (obj) => {
     return Function("return (" + obj + ")")();
-  }
-
-
-  handleEvaluate = (obj) => {
-  //  this.myTest(obj);
-    this.setState({pastEquationAnswer: this.myTest(obj)})
   };
 
-
+  handleEvaluate = (obj) => {
+    //  this.myTest(obj);
+    this.setState({ pastEquationAnswer: this.myTest(obj) });
+  };
 
   render() {
     return (

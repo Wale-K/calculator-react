@@ -16,7 +16,7 @@ const Screen = (props) => {
   return (
     <ScreenBackground>
       <p>{props.pastEquationAnswer}</p>
-      <p>{props.currentEquation}</p>
+      <p>{props.currentEquation || "0"}</p>
     </ScreenBackground>
   );
 };
