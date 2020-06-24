@@ -15,7 +15,7 @@ const ScreenBackground = styled.div`
 const Screen = (props) => {
   return (
     <ScreenBackground>
-      <p>{props.pastEquationAnswer}</p>
+      <p>{props.pastEquationAnswer || "0"}</p>
       <p>{props.currentEquation || "0"}</p>
     </ScreenBackground>
   );

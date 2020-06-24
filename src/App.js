@@ -16,8 +16,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      pastEquationAnswer: "0",
+      pastEquationAnswer: "",
       currentEquation: "",
+      clearEquation: false,
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleAllClear = this.handleAllClear.bind(this);
@@ -26,7 +27,10 @@ class App extends React.Component {
     this.myTest = this.myTest.bind(this);
   }
 
-  handleClick = (buttonValue) => () => {
+  handleClick = (buttonValue, isOperator = false) => () => {
+    if (this.state.clearEquation === true) {
+      this.setState({currentEquation: "", clearEquation: false})
+    }
     if (this.state.currentEquation.trim() === "0") {
       this.setState({ currentEquation: buttonValue });
     } else
@@ -41,20 +45,15 @@ class App extends React.Component {
   };
 
   handleAllClear = () => {
-    this.setState({ pastEquationAnswer: "0", currentEquation: "0" });
+    this.setState({ pastEquationAnswer: "", currentEquation: "" });
   };
 
-  // handleDelete = () => {
-  //   if (this.state.currentEquation === "") {
-
-  //   } else {
-  //     this.setState((prevState) => {
-  //       currentEquation: prevState.currentEquation.slice(0, prevState.currentEquation.trim().length - 1)
-  //     })
-  //   }
-  // }
-
   handleDelete = () => {
+// if (this.state.currentEquation.trim().length === 1) {
+//   this.setState(currentEquation)
+// }
+
+
     this.setState((prevState) => {
       return {
         currentEquation: prevState.currentEquation.slice(
@@ -62,7 +61,7 @@ class App extends React.Component {
           prevState.currentEquation.trim().length - 1
         ),
       };
-    }, console.log(`The currentEquation is: ${this.state.currentEquation} and the length is ${this.state.currentEquation.length}`));
+    });
   };
 
   myTest = (obj) => {
@@ -70,8 +69,11 @@ class App extends React.Component {
   };
 
   handleEvaluate = (obj) => {
-    //  this.myTest(obj);
-    this.setState({ pastEquationAnswer: this.myTest(obj) });
+    this.setState((prevState) => {
+      return {
+        pastEquationAnswer: this.myTest(obj), clearEquation: true
+      };
+    });
   };
 
   render() {
@@ -80,6 +82,7 @@ class App extends React.Component {
         <Screen
           currentEquation={this.state.currentEquation}
           pastEquationAnswer={this.state.pastEquationAnswer}
+          
         />
         <Remote
           handleClick={this.handleClick}
