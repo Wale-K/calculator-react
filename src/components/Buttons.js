@@ -35,16 +35,6 @@ const WideButtonsStyle = styled.button`
   border: solid orange 1px;
 `;
 
-// const buttonsMapped = (bob) => {
-//   return allButtons.map((elem) => {
-//     return (
-//       <ButtonsStyle onClick={bob.handleClick} id={elem}>
-//         {elem}
-//       </ButtonsStyle>
-//     );
-//   });
-// };
-
 export const Buttons = (props) => {
   // const buttonsMapped = allButtons.map((elem) => {
   //     return <ButtonsStyle onClick={props.handleClick} id={elem}>{elem}</ButtonsStyle>;
